@@ -5,8 +5,18 @@ namespace :db do
     make_microposts
     make_relationships
   end
+  task initialize: :environment do
+    make_admin
+  end
 end
 
+def make_admin
+  admin = User.create!( name:     "Rails Admin",
+                        email:    "admin@admin.gr",
+                        password: "the_admin",
+                        password_confirmation: "the_admin")
+  admin.toggle!(:admin)
+end
 def make_users
   admin = User.create!( name:     "Example User",
                         email:    "example@railstutorial.org",
